@@ -2,25 +2,25 @@
   <div>
     <button
       mat-icon-button
-      (click)="clearNotifications()"
-      [matBadge]="notifCount"
-      [matBadgeHidden]="notifCount == 0 ? true : false"
+      (click)="clearReceived()"
+      [matBadge]="rcvCnt"
+      [matBadgeHidden]="rcvCnt == 0 ? true : false"
     >
       <mat-icon> mail_outline </mat-icon>
     </button>
   </div>
   <div fxLayout="row" fxLayoutGap="8px">
     <button
-      (click)="startReceivingNotif()"
-      [disabled]="isReceivingNotif"
+      (click)="startReceiving()"
+      [disabled]="isReceiving"
       mat-raised-button
       color="primary"
     >
       Start receiving
     </button>
     <button
-      (click)="stopReceivingNotifs()"
-      [disabled]="!isReceivingNotif"
+      (click)="stopReceiving()"
+      [disabled]="!isReceiving"
       mat-raised-button
       color="accent"
     >

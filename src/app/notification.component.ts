@@ -6,38 +6,47 @@ import { interval, Observable, Subscription } from 'rxjs';
   templateUrl: './notification.component.html',
 })
 export class NotificationComponent {
-  private readonly NOTIF_DELAY = 300; //300 ms
+  private readonly NOTIF_DELAY = 300; //in milliseconds
 
   private _notifPulse: Observable<number>;
-  private _notifSubscription: Subscription;
+  private _notifObserver: Subscription;
 
-  public notifCount: number;
-  public isReceivingNotif: boolean;
+  public rcvCnt: number;
+  public isReceiving: boolean;
 
   constructor() {
-    this.notifCount = 0;
-    this.isReceivingNotif = false;
-    this._notifPulse = interval(this.NOTIF_DELAY);
+    this.rcvCnt = 0;
+    this.isReceiving = false;
+    this._notifPulse = this._generatePulse(this.NOTIF_DELAY);
   }
 
-  startReceivingNotif() {
-    this._notifSubscription = this._notifPulse.subscribe((_) =>
-      this.incrNotifications()
-    );
-    this.isReceivingNotif = true;
+  startReceiving() {
+    this._notifObserver = this._generateObserver(this._notifPulse);
+    this.isReceiving = true;
   }
 
-  stopReceivingNotifs() {
-    this._notifSubscription.unsubscribe();
-    this._notifSubscription = null; //clear previous subscription
-    this.isReceivingNotif = false;
+  stopReceiving() {
+    this._stopObserving(this._notifObserver);
+    this.isReceiving = false;
   }
 
-  clearNotifications() {
-    this.notifCount = 0;
+  clearReceived() {
+    this.rcvCnt = 0;
   }
 
-  incrNotifications() {
-    this.notifCount++;
+  private _stopObserving(notifSubscription: Subscription) {
+    notifSubscription.unsubscribe();
+  }
+
+  private _generateObserver(notifPulse: Observable<number>) {
+    return notifPulse.subscribe((_) => this._incrNotifications());
+  }
+
+  private _generatePulse(delay: number) {
+    return interval(delay);
+  }
+
+  private _incrNotifications() {
+    this.rcvCnt++;
   }
 }
