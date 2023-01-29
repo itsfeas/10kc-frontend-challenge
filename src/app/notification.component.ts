@@ -6,7 +6,7 @@ import { interval, Observable, Subscription } from 'rxjs';
   templateUrl: './notification.component.html',
 })
 export class NotificationComponent {
-  private readonly NOTIF_DELAY = 300; //in milliseconds
+  private readonly RCV_DELAY = 300; //in milliseconds
 
   private _notifPulse: Observable<number>;
   private _notifObserver: Subscription;
@@ -17,7 +17,7 @@ export class NotificationComponent {
   constructor() {
     this.rcvCnt = 0;
     this.isReceiving = false;
-    this._notifPulse = this._generatePulse(this.NOTIF_DELAY);
+    this._notifPulse = this._generatePulse(this.RCV_DELAY);
   }
 
   startReceiving() {
