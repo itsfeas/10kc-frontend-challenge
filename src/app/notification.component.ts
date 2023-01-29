@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { interval, Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -6,35 +6,31 @@ import { interval, Observable, Subscription } from 'rxjs';
   templateUrl: './notification.component.html',
 })
 export class NotificationComponent {
-  public notifCount: number;
-  public notifSendingEnabled: boolean;
-
-  private notifPulse: Observable<number>;
-  private notifSubscription: Subscription;
-
   private readonly NOTIF_DELAY = 300; //300 ms
+
+  private _notifPulse: Observable<number>;
+  private _notifSubscription: Subscription;
+
+  public notifCount: number;
+  public isReceivingNotif: boolean;
 
   constructor() {
     this.notifCount = 0;
-    this.notifSendingEnabled = false;
-    this.notifPulse = interval(this.NOTIF_DELAY);
+    this.isReceivingNotif = false;
+    this._notifPulse = interval(this.NOTIF_DELAY);
   }
 
-  toggleNotificationSending() {
-    this.notifSendingEnabled
-      ? this.unsubscribeToNotifications(this.notifSubscription)
-      : (this.notifSubscription = this.subscribeToNotifications(
-          this.notifPulse
-        ));
-    this.notifSendingEnabled = !this.notifSendingEnabled;
+  startReceivingNotif() {
+    this._notifSubscription = this._notifPulse.subscribe((_) =>
+      this.incrNotifications()
+    );
+    this.isReceivingNotif = true;
   }
 
-  subscribeToNotifications(notifPulse: Observable<number>) {
-    return notifPulse.subscribe((_) => this.incrNotifications());
-  }
-
-  unsubscribeToNotifications(notifSubscription: Subscription) {
-    notifSubscription.unsubscribe();
+  stopReceivingNotifs() {
+    this._notifSubscription.unsubscribe();
+    this._notifSubscription = null; //clear previous subscription
+    this.isReceivingNotif = false;
   }
 
   clearNotifications() {

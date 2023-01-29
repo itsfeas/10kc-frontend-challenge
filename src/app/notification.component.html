@@ -12,16 +12,16 @@
   </div>
   <div fxLayout="row">
     <button
-      (click)="toggleNotificationSending()"
-      [disabled]="notifSendingEnabled"
+      (click)="startReceivingNotif()"
+      [disabled]="isReceivingNotif"
       mat-raised-button
       color="primary"
     >
       Start receiving
     </button>
     <button
-      (click)="toggleNotificationSending()"
-      [disabled]="!notifSendingEnabled"
+      (click)="stopReceivingNotifs()"
+      [disabled]="!isReceivingNotif"
       mat-raised-button
       color="accent"
     >
