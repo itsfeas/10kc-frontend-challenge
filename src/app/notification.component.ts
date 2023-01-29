@@ -12,10 +12,12 @@ export class NotificationComponent {
   private notifPulse: Observable<number>;
   private notifSubscription: Subscription;
 
+  private readonly NOTIF_DELAY = 300; //300 ms
+
   constructor() {
     this.notifCount = 0;
     this.notifSendingEnabled = false;
-    this.notifPulse = interval(300);
+    this.notifPulse = interval(this.NOTIF_DELAY);
   }
 
   toggleNotificationSending() {
