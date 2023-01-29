@@ -1,1 +1,8 @@
-/* Add application styles & imports to this file! */
+//import pre-built theme, 'pink-bluegrey'
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+//import angular material icons pack
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// //import roboto
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500');

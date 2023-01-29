@@ -1,0 +1,31 @@
+<div>
+  <div>
+    <button mat-icon-button (click)="clearNotifications()">
+      <mat-icon
+        [matBadge]="notifCount"
+        [matBadgeHidden]="notifCount == 0 ? true : false"
+        matBadgeOverlap="false"
+      >
+        mail_outline
+      </mat-icon>
+    </button>
+  </div>
+  <div fxLayout="row">
+    <button
+      (click)="toggleNotificationSending()"
+      [disabled]="notifSendingEnabled"
+      mat-raised-button
+      color="primary"
+    >
+      Start receiving
+    </button>
+    <button
+      (click)="toggleNotificationSending()"
+      [disabled]="!notifSendingEnabled"
+      mat-raised-button
+      color="accent"
+    >
+      <span class="mat-button-wrapper">Stop receiving</span>
+    </button>
+  </div>
+</div>
