@@ -7,7 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
-import { NotificationComponent } from './notification.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   imports: [
