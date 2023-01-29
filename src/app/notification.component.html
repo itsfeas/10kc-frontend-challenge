@@ -1,16 +1,15 @@
-<div>
+<div fxLayout="column" fxLayoutGap="24px" fxLayoutAlign="center center">
   <div>
-    <button mat-icon-button (click)="clearNotifications()">
-      <mat-icon
-        [matBadge]="notifCount"
-        [matBadgeHidden]="notifCount == 0 ? true : false"
-        matBadgeOverlap="false"
-      >
-        mail_outline
-      </mat-icon>
+    <button
+      mat-icon-button
+      (click)="clearNotifications()"
+      [matBadge]="notifCount"
+      [matBadgeHidden]="notifCount == 0 ? true : false"
+    >
+      <mat-icon> mail_outline </mat-icon>
     </button>
   </div>
-  <div fxLayout="row">
+  <div fxLayout="row" fxLayoutGap="8px">
     <button
       (click)="startReceivingNotif()"
       [disabled]="isReceivingNotif"
