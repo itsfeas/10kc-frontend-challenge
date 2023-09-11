@@ -1,4 +1,4 @@
-# 10kc-frontend-challenge
+# angular-frontend-challenge
 
 ## Submission by Muhammad Fiaz!
 
